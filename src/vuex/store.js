@@ -26,17 +26,19 @@ const store = new Vuex.Store({
     },
     actions: {
         ADD_LIST({ commit }, newListProduct) {
-            const newUser = { ...newListProduct, id: String(Math.random()) }
+            const newUser = { ...newListProduct, id: String(Math.floor(Math.random() * 100000)) }
             commit('ADD_USER_LIST', newUser)
         },
          DELITE_LIST({commit},  id) {
              commit('DELITE_USER_LIST', id)
          }
+
     },
     getters: {
       GET_LIST(state) {
           return state.list
-      }
+      },
+    
     },
 
 })

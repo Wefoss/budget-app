@@ -1,15 +1,23 @@
-<template lang="">
+<template >
     <div id="budget">
       
       <el-card class="box-card" :header="cardHeader">
+         <div  class="btn-sort">
+           <el-button  class="btn-income" size="medium" type="info" round @click="sortIncome('INCOME')">INCOME</el-button>
+           <el-button  size="medium" type="info" round @click="sortIncome('OUTCOME')">OUTCOME</el-button>
+           <el-button size="medium" type="info" round @click="sortIncome('All')" >All</el-button>
+        </div>
         <template v-if="budgetListLength">
          
-         <listItem :budgetList="budgetList"
+       
+              <div v-for="(list, prop) in budgetList" :key="prop" class="listItem">
+                 <listItem  :list="list"
                    @deliteProduct="deliteProduct"
-                   @sortIncome="sortIncome"
-                   
           />  
+              </div>
+        
         </template>
+         
         <el-alert v-else  type="info" :title="emptyTitle"></el-alert>
       </el-card>
      
@@ -45,10 +53,10 @@ export default {
   },
  methods: {
     deliteProduct(name) {
-      return this.$emit('deliteProduct', name)
+       this.$emit('deliteProduct', name)
     },
     sortIncome(type) {
-    return this.$emit('sortIncome', type)
+     this.$emit('sortIncome', type)
     },
    
   }

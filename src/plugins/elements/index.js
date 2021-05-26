@@ -4,6 +4,8 @@ import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 
 locale.use(lang)
+Vue.prototype.$message = Message                       
+Vue.prototype.$confirm = MessageBox.confirm
 
 import {
     Button,
@@ -14,8 +16,9 @@ import {
     Card,
     Option,
     Alert,
-    Dialog
-
+    Dialog,
+    MessageBox,
+    Message
 } from 'element-ui';
 
 const elememts = [
@@ -27,7 +30,8 @@ const elememts = [
     Card,
     Option,
     Alert,
-    Dialog
+    Dialog,
+   
 ]
 
 elememts.forEach(El => Vue.use(El, { locale }))

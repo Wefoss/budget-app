@@ -6,7 +6,6 @@
       :budgetList="subList"
       @deliteProduct="deliteProduct"
       @sortIncome="sortIncome"
-      
     />
   </div>
 </template>
@@ -15,7 +14,7 @@
 import Budget from "./components/budget";
 import formSubmit from "./components/form";
 import Balance from "./components/balance";
-import {mapActions, mapGetters} from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -26,44 +25,49 @@ export default {
   },
   data() {
     return {
-         subList: {}
+      subList: {},
+      Includesroperty: true,
     };
   },
   computed: {
+   
     totalBalance() {
-      return Object.values(this.GET_LIST).reduce((acc, el) => acc + el.value, 0);
+      return Object.values(this.GET_LIST).reduce(
+        (acc, el) => acc + el.value,
+        0
+      );
     },
-    ...mapGetters(["GET_LIST"])
+    ...mapGetters(["GET_LIST"]),
   },
   created() {
-    this.subList = this.GET_LIST
+    this.subList = this.GET_LIST;
+  },
+
+  watch: {
+    "this.GET_LIST": "this.getValueProperty",
   },
   methods: {
-  ...mapActions(["ADD_LIST", 'DELITE_LIST']),
+    ...mapActions(["ADD_LIST", "DELITE_LIST"]),
 
     deliteProduct(name) {
-      this.DELITE_LIST(name)
+      this.DELITE_LIST(name);
     },
     addToObject(data) {
-      this.ADD_LIST(data)
+      this.ADD_LIST(data);
     },
     sortIncome(type) {
-     if(type === "All") {
-       return  this.subList = this.GET_LIST
-     }
-     if(Object.values(this.GET_LIST).length < 2) {
-       return this.subList = this.GET_LIST
-     }
-     const newObj = Object.values(this.GET_LIST).filter(el => el.type === type)
-     .reduce((acc, el) => {
-       acc[el.id] = el
-       return acc
-     }, {})
-           
-        return this.subList = newObj
-           
+      if (type === "All") {
+        return (this.subList = this.GET_LIST);
+      }
+      const newObj = Object.values(this.GET_LIST)
+        .filter((el) => el.type === type)
+        .reduce((acc, el) => {
+          acc[el.id] = el;
+          return acc;
+        }, {});
+
+      return this.subList = newObj
     },
-   
   },
 };
 </script>
