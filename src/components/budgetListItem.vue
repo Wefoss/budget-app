@@ -20,7 +20,7 @@
         <span>Are you sure to close</span>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">Cancel</el-button>
-          <el-button class="btn" @click="deliteProduct(list.id)" type="danger">
+          <el-button class="btn" @click="deliteProduct(list)" type="danger">
             Confirm
           </el-button>
         </span>
@@ -50,7 +50,7 @@ export default {
   methods: {
     deliteProduct(id) {
       this.dialogVisible = false;
-      console.log(this.list);
+      
       this.$emit("deliteProduct", id);
     },
     handleClose(done) {

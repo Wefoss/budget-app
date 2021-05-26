@@ -30,7 +30,7 @@ export default {
     };
   },
   computed: {
-   
+    
     totalBalance() {
       return Object.values(this.GET_LIST).reduce(
         (acc, el) => acc + el.value,
@@ -43,17 +43,18 @@ export default {
     this.subList = this.GET_LIST;
   },
 
-  watch: {
-    "this.GET_LIST": "this.getValueProperty",
-  },
+
   methods: {
+   
     ...mapActions(["ADD_LIST", "DELITE_LIST"]),
 
     deliteProduct(name) {
-      this.DELITE_LIST(name);
+      this.DELITE_LIST(name.id);
+        this.subList = this.GET_LIST
     },
     addToObject(data) {
       this.ADD_LIST(data);
+      this.subList = this.GET_LIST
     },
     sortIncome(type) {
       if (type === "All") {
